@@ -122,19 +122,19 @@ public class SpacexController {
                 json.getString("status"),
                 json.getInt("speed_kn"),
                 json.getInt("course_deg"),
-                json.getJSONArray("lattitude", "longitude"),
                 json.getInt("successful_landings"),
                 json.getInt("attempted_landing"),
                 json.getString("mission")
                 );
         }
+        try { response[i].setStatus(json.getString("status")); } catch (Exception e) { }
+        try { response[i].setDetails(json.getString("details")); } catch (Exception e) { }
+        try { response[i].setBlock(json.getInt("block")); } catch (Exception e) { }
+        try { response[i].setLaunch(json.getString("original_launch")); } catch (Exception e) { }
     }
 }
         /*   
-            try { response[i].setStatus(json.getString("status")); } catch (Exception e) { }
-            try { response[i].setDetails(json.getString("details")); } catch (Exception e) { }
-            try { response[i].setBlock(json.getInt("block")); } catch (Exception e) { }
-            try { response[i].setLaunch(json.getString("original_launch")); } catch (Exception e) { }
+            
 
             JSONArray missDat = json.getJSONArray("missions");
             String[] missions = new String[missDat.length()];
