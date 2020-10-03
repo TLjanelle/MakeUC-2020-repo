@@ -10,18 +10,23 @@ import java.nio.charset.Charset;
 
 public class JSONReader {
     public static JSONObject readJSON(String url) {
+        return readJSON(url, "", "");
+    }
+    public static JSONObject readJSON(String url, String start, String end) {
         InputStream is = null;
         try {
             is = new URL(url).openStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-            StringBuffer json = new StringBuffer();
+            StringBuilder json = new StringBuilder(start);
 
             int character;
             while((character = br.read()) != -1) {
                 json.append((char) character);
             }
+            json.append(end);
             return new JSONObject(json.toString());
         } catch(Exception e){
+            System.out.println(e);
             return null;
         } finally {
             if (is != null) {
@@ -32,6 +37,5 @@ public class JSONReader {
                 }
             }
         }
-
     }
 }
