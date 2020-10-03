@@ -22,6 +22,8 @@ public class SpacexController {
                 return "redirect:capsules";
             case "cores":
                 return "redirect:cores";
+            case "ships":
+                return "redirect:Ships";
         }
 
         return "Search";
@@ -99,4 +101,41 @@ public class SpacexController {
         model.addAttribute("cores", response);
         return "Cores";
     }
+
+
+    @RequestMapping("/Spacex/Ships")
+
+    public String Ships(Model model) {
+        JSONObject apiJSON = JSONReader.readJSON(("https://api.spacexdata.com/v3/ships"), "{response:", "}");
+    }
+     /*   JSONArray data[][] = apiJSON.getJSONArray("response");
+
+        Ship[][] response = new Ship[dataArr.length()];
+        for (int i=0; i < dataArr.length(); i++) {
+            JSONObject json = dataArr.getJSONObject(i);
+            response[i] = new Core(
+                    json.getString("core_serial"),
+                    json.getInt("reuse_count"),
+                    json.getInt("rtls_attempts"),
+                    json.getInt("rtls_landings"),
+                    json.getInt("asds_attempts"),
+                    json.getInt("asds_landings"),
+                    json.getBoolean("water_landing")
+            );
+            try { response[i].setStatus(json.getString("status")); } catch (Exception e) { }
+            try { response[i].setDetails(json.getString("details")); } catch (Exception e) { }
+            try { response[i].setBlock(json.getInt("block")); } catch (Exception e) { }
+            try { response[i].setLaunch(json.getString("original_launch")); } catch (Exception e) { }
+
+            JSONArray missDat = json.getJSONArray("missions");
+            String[] missions = new String[missDat.length()];
+            for (int j=0; j < missDat.length(); j++) {
+                missions[j] = missDat.getJSONObject(j).getString("name");
+            }
+            response[i].setMissions(missions);
+        }
+        model.addAttribute("ships", response);
+        return "Ships";
+*/
+
 }
