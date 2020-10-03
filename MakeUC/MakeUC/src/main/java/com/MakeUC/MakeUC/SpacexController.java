@@ -21,17 +21,11 @@ public class SpacexController {
             case "capsules":
                 return "redirect:Capsules";
             case "cores":
-<<<<<<< HEAD
-                return "redirect:cores";
-            case "ships":
-                return "redirect:Ships";
-=======
                 return "redirect:Cores";
             case "launches":
                 return "redirect:Launches";
             case "missions":
                 return "redirect:Missions";
->>>>>>> 3e85c6caea6afc4f38270bce798b4d31297bc47b
         }
 
         return "Search";
