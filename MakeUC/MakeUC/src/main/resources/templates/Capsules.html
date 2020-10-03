@@ -6,28 +6,14 @@
     <title>Title</title>
 </head>
 <body>
-    <table>
-        <tr>
-            <th>Capsule</th>
-            <th>ID</th>
-            <th>Serial</th>
-            <th>Status</th>
-            <th>Original Launch Data</th>
-            <th>Landings</th>
-            <th>Type</th>
-            <th>Other Details</th>
-            <th>Reuses</th>
-        </tr>
-        <tr th:each="capsule: ${capsules}">
-            <td th:text="${capsule.id}"></td>
-            <td th:text="${capsule.serial}"></td>
-            <td th:text="${capsule.status}"></td>
-            <td th:text="${capsule.o_launch}"></td>
-            <td th:text="${capsule.landings}"></td>
-            <td th:text="${capsule.type}"></td>
-            <td th:text="${capsule.dets}"></td>
-            <td th:text="${capsule.reuses}"></td>
-        </tr>
-    </table>
+    <div th:each="capsule: ${capsules}">
+        <h1 th:text="'ID ' + ${capsule.id} + ' Serial ' + ${capsule.serial}"></h1>
+        <p th:text="'Status ' + ${capsule.status}"></p>
+        <p th:text="'Original Launch ' + ${capsule.o_launch}"></p>
+        <p th:text="'Number of landings ' + ${capsule.landings}"></p>
+        <p th:text="'Number of reuses ' + ${capsule.reuses}"></p>
+        <p th:text="'Capsule Type: ' + ${capsule.type}"></p>
+        <p th:text="'Other Details: ' + ${capsule.dets}"></p>
+    </div>
 </body>
 </html>
