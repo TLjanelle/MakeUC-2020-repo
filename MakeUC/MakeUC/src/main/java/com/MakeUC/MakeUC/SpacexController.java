@@ -104,24 +104,33 @@ public class SpacexController {
 
 
     @RequestMapping("/Spacex/Ships")
-
     public String Ships(Model model) {
         JSONObject apiJSON = JSONReader.readJSON(("https://api.spacexdata.com/v3/ships"), "{response:", "}");
-    }
-     /*   JSONArray data[][] = apiJSON.getJSONArray("response");
+   JSONArray data[][] = apiJSON.getJSONArray("response");
 
-        Ship[][] response = new Ship[dataArr.length()];
+        Ship[] response = new Ship[dataArr.length()];
         for (int i=0; i < dataArr.length(); i++) {
             JSONObject json = dataArr.getJSONObject(i);
-            response[i] = new Core(
-                    json.getString("core_serial"),
-                    json.getInt("reuse_count"),
-                    json.getInt("rtls_attempts"),
-                    json.getInt("rtls_landings"),
-                    json.getInt("asds_attempts"),
-                    json.getInt("asds_landings"),
-                    json.getBoolean("water_landing")
-            );
+            response[i] = new Ships(
+                json.getString("ship_id"),
+                json.getString("ship_name"),
+                json.getString("ship_model"),
+                json.getString("ship_type"),
+                json.getString("role"),
+                json.getInt("year_built"),
+                json.getString("home_port"),
+                json.getString("status"),
+                json.getInt("speed_kn"),
+                json.getInt("course_deg"),
+                json.getJSONArray("lattitude", "longitude"),
+                json.getInt("successful_landings"),
+                json.getInt("attempted_landing"),
+                json.getString("mission")
+                );
+        }
+    }
+}
+        /*   
             try { response[i].setStatus(json.getString("status")); } catch (Exception e) { }
             try { response[i].setDetails(json.getString("details")); } catch (Exception e) { }
             try { response[i].setBlock(json.getInt("block")); } catch (Exception e) { }
@@ -137,5 +146,3 @@ public class SpacexController {
         model.addAttribute("ships", response);
         return "Ships";
 */
-
-}

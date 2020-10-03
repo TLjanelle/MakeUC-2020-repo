@@ -11,7 +11,8 @@ public class Ships{
         longitude = lon;
     }
 
-    public void getLocation(float[][] ){
+    // public void getLocation(float[][] ){
 
-    }
+    // }
+
 }
