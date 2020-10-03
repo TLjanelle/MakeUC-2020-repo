@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="MakeUC\MakeUC\src\main\resources\templates\MakeUcCss.css">
+    <title>Title</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Capsule</th>
+            <th>ID</th>
+            <th>Serial</th>
+            <th>Status</th>
+            <th>Original Launch Data</th>
+            <th>Landings</th>
+            <th>Type</th>
+            <th>Other Details</th>
+            <th>Reuses</th>
+        </tr>
+        <tr th:each="capsule: ${capsules}">
+            <td th:text="${capsule.id}"></td>
+            <td th:text="${capsule.serial}"></td>
+            <td th:text="${capsule.status}"></td>
+            <td th:text="${capsule.o_launch}"></td>
+            <td th:text="${capsule.landings}"></td>
+            <td th:text="${capsule.type}"></td>
+            <td th:text="${capsule.dets}"></td>
+            <td th:text="${capsule.reuses}"></td>
+        </tr>
+    </table>
+</body>
+</html>

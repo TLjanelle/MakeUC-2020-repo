@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="MakeUC\MakeUC\src\main\resources\templates\MakeUcCss.css">
+    <title>Title</title>
+</head>
+<body>
+    <table>
+    <tr>
+        <th>Capsule</th>
+        <th>ID</th>
+        <th>Serial</th>
+        <th>Status</th>
+        <th>Original Launch Data</th>
+        <th>Landings</th>
+        <th>Type</th>
+        <th>Other Details</th>
+        <th>Reuses</th>
+    </tr>
+    <tr th:each="core: ${cores}">
+        <td th:text="${core.serial}"></td>
+        <td th:text="${core.block}"></td>
+        <td th:text="${core.status}"></td>
+        <td th:text="${core.o_launch}"></td>
+        <td th:text="${core.reuse}"></td>
+        <td th:text="${core.rtls_att}"></td>
+        <td th:text="${core.rtls_landing}"></td>
+        <td th:text="${core.asds_att}"></td>
+        <td th:text="${core.asds_landing}"></td>
+        <td th:text="${core.water_landing}"></td>
+        <td th:text="${core.dets}"></td>
+    </tr>
+</table>
+</body>
+</html>
