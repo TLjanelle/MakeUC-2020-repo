@@ -5,31 +5,19 @@
     <title>Title</title>
 </head>
 <body>
-    <table>
-    <tr>
-        <th>Capsule</th>
-        <th>ID</th>
-        <th>Serial</th>
-        <th>Status</th>
-        <th>Original Launch Data</th>
-        <th>Landings</th>
-        <th>Type</th>
-        <th>Other Details</th>
-        <th>Reuses</th>
-    </tr>
-    <tr th:each="core: ${cores}">
-        <td th:text="${core.serial}"></td>
-        <td th:text="${core.block}"></td>
-        <td th:text="${core.status}"></td>
-        <td th:text="${core.o_launch}"></td>
-        <td th:text="${core.reuse}"></td>
-        <td th:text="${core.rtls_att}"></td>
-        <td th:text="${core.rtls_landing}"></td>
-        <td th:text="${core.asds_att}"></td>
-        <td th:text="${core.asds_landing}"></td>
-        <td th:text="${core.water_landing}"></td>
-        <td th:text="${core.dets}"></td>
-    </tr>
-</table>
+
+    <div th:each="core: ${cores}">
+        <h1 th:text="'Serial ' + ${core.serial} + ' Block ' + ${core.block}"></h1>
+        <p th:text="'Status ' + ${core.status}"></p>
+        <p th:text="'Original Launch ' + ${core.o_launch}"></p>
+        <p th:text="'Number of times reused ' + ${core.reuse}"></p>
+        <p th:text="'Return to launch site attempts: ' + ${core.rtls_att}"></p>
+        <p th:text="'Return to launch site landings: ' + ${core.rtls_landing}"></p>
+        <p th:text="'Autonomous Spaceport Drone Ship landing attempts: ' + ${core.asds_att}"></p>
+        <p th:text="'Autonomous Spaceport Drone Ship landings: ' + ${core.asds_landing}"></p>
+        <p th:text="'Water Landing ' + ${core.water_landing}"></p>
+        <p th:text="'Other Details: ' + ${core.dets}"></p>
+    </div>
+
 </body>
 </html>
