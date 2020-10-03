@@ -103,7 +103,6 @@ public class SpacexController {
         model.addAttribute("cores", response);
         return "Cores";
     }
-<<<<<<< HEAD
 
 
     @RequestMapping("/Spacex/Ships")
@@ -134,7 +133,8 @@ public class SpacexController {
         try { response[i].setDetails(json.getString("details")); } catch (Exception e) { }
         try { response[i].setBlock(json.getInt("block")); } catch (Exception e) { }
         try { response[i].setLaunch(json.getString("original_launch")); } catch (Exception e) { }
-=======
+    }
+    
     @RequestMapping("/Spacex/Rockets")
     public String Rockets(Model model) {
         JSONObject apiJSON = JSONReader.readJSON(("https://api.spacexdata.com/v3/rockets"), "{response:", "}");
@@ -250,7 +250,6 @@ public class SpacexController {
         for (int i = 0; i < dataArr.length(); i++) {
 
         }
->>>>>>> 3e85c6caea6afc4f38270bce798b4d31297bc47b
     }
 }
         /*   
