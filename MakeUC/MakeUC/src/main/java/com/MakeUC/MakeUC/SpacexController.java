@@ -242,14 +242,128 @@ public class SpacexController {
 
     @RequestMapping("/Spacex/Missions")
     public String Missions(Model model) {
-        JSONObject apiJSON = JSONReader.readJSON(("https://api.spacexdata.com/v3/rockets"), "{response:", "}");
+        JSONObject apiJSON = JSONReader.readJSON(("https://api.spacexdata.com/v3/missions"), "{response:", "}");
 
         JSONArray dataArr = apiJSON.getJSONArray("response");
 
         Mission[] response = new Mission[dataArr.length()];
         for (int i = 0; i < dataArr.length(); i++) {
+            JSONObject json = dataArr.getJSONObject(i);
 
+            response[i] = new Mission();
+            response[i].name = json.getString("mission_name");
+            response[i].id = json.getString("mission_id");
+
+            JSONArray jsonManus = json.getJSONArray("manufacturers");
+            String[] manus = new String[jsonManus.length()];
+            for (int j=0; j < jsonManus.length(); j++) {
+                manus[j] = jsonManus.getString(j);
+            }
+            response[i].manufacturers = manus;
+
+            JSONArray jsonPayIds = json.getJSONArray("payload_ids");
+            String[] payIds = new String[jsonPayIds.length()];
+            for (int j=0; j < jsonPayIds.length(); j++) {
+                payIds[j] = jsonPayIds.getString(j);
+            }
+            response[i].payloadIds = payIds;
+
+            response[i].wiki = json.getString("wikipedia");
+            response[i].website = json.getString("website");
+            try {response[i].twitter = json.getString("twitter");} catch (Exception e) {response[i].twitter = "";}
+            response[i].description = json.getString("description");
         }
+        model.addAttribute("missions", response);
+        return "Missions";
+    }
+
+    @RequestMapping("/Spacex/Dragons")
+    public String Dragons(Model model) {
+        JSONObject apiJSON = JSONReader.readJSON(("https://api.spacexdata.com/v3/dragons"), "{response:", "}");
+
+        JSONArray dataArr = apiJSON.getJSONArray("response");
+
+        Dragons[] response = new Dragons[dataArr.length()];
+        for (int i = 0; i < dataArr.length(); i++) {
+            JSONObject json = dataArr.getJSONObject(i);
+
+            response[i] = new Dragons();
+            response[i].name = json.getString("name");
+            response[i].type = json.getString("type");
+            response[i].active = json.getBoolean("active");
+            response[i].capacity = json.getInt("crew_capacity");
+            response[i].orbit = json.getInt("orbit_duration_yr");
+            response[i].dryMassKg = json.getInt("dry_mass_kg");
+            response[i].dryMassLb = json.getInt("dry_mass_lb");
+            response[i].o_launch = json.getString("first_flight");
+
+            response[i].shield = new Dragons.HeatShield();
+            response[i].shield.material = json.getJSONObject("heat_shield").getString("material");
+            response[i].shield.size = json.getJSONObject("heat_shield").getDouble("size_meters");
+            response[i].shield.temp = json.getJSONObject("heat_shield").getInt("temp_degrees");
+            response[i].shield.dev = json.getJSONObject("heat_shield").getString("dev_partner");
+
+            JSONArray thrusArr = json.getJSONArray("thrusters");
+            Dragons.Thruster[] thrustArr = new Dragons.Thruster[thrusArr.length()];
+            for (int j = 0; j < thrusArr.length(); j++) {
+                thrustArr[j] = new Dragons.Thruster();
+                thrustArr[j].type = thrusArr.getJSONObject(j).getString("type");
+                thrustArr[j].amount = thrusArr.getJSONObject(j).getInt("amount");
+                thrustArr[j].pods = thrusArr.getJSONObject(j).getInt("pods");
+                thrustArr[j].f1 = thrusArr.getJSONObject(j).getString("fuel_1");
+                thrustArr[j].f2 = thrusArr.getJSONObject(j).getString("fuel_2");
+                thrustArr[j].isp = thrusArr.getJSONObject(j).getInt("isp");
+                thrustArr[j].thrustKn = thrusArr.getJSONObject(j).getJSONObject("thrust").getDouble("kN");
+                thrustArr[j].thrustLbf = thrusArr.getJSONObject(j).getJSONObject("thrust").getInt("lbf");
+            }
+            response[i].thrusters = thrustArr;
+
+            response[i].launch = new Dragons.Mass();
+            response[i].launch.kg = json.getJSONObject("launch_payload_mass").getInt("kg");
+            response[i].launch.lb = json.getJSONObject("launch_payload_mass").getInt("lb");
+
+            response[i].launchVol = new Dragons.Vol();
+            response[i].launchVol.meters = json.getJSONObject("launch_payload_vol").getInt("cubic_meters");
+            response[i].launchVol.feet = json.getJSONObject("launch_payload_vol").getInt("cubic_feet");
+
+            response[i].ret = new Dragons.Mass();
+            response[i].ret.kg = json.getJSONObject("return_payload_mass").getInt("kg");
+            response[i].ret.lb = json.getJSONObject("return_payload_mass").getInt("lb");
+
+            response[i].retVol = new Dragons.Vol();
+            response[i].retVol.meters = json.getJSONObject("return_payload_vol").getInt("cubic_meters");
+            response[i].retVol.feet = json.getJSONObject("return_payload_vol").getInt("cubic_feet");
+
+            response[i].pressVol = new Dragons.Vol();
+            response[i].pressVol.meters = json.getJSONObject("pressurized_capsule").getJSONObject("payload_volume").getInt("cubic_meters");
+            response[i].pressVol.feet = json.getJSONObject("pressurized_capsule").getJSONObject("payload_volume").getInt("cubic_feet");
+
+            response[i].trunk = new Dragons.Trunk();
+            response[i].trunk.vol = new Dragons.Vol();
+            response[i].trunk.vol.meters = json.getJSONObject("trunk").getJSONObject("trunk_volume").getInt("cubic_meters");
+            response[i].trunk.vol.feet = json.getJSONObject("trunk").getJSONObject("trunk_volume").getInt("cubic_feet");
+            response[i].trunk.solArray = json.getJSONObject("trunk").getJSONObject("cargo").getInt("solar_array");
+            response[i].trunk.cargo = json.getJSONObject("trunk").getJSONObject("cargo").getBoolean("unpressurized_cargo");
+
+            response[i].heightWTruck = new Dragons.Vol();
+            response[i].heightWTruck.meters = json.getJSONObject("height_w_trunk").getDouble("meters");
+            response[i].heightWTruck.feet = json.getJSONObject("height_w_trunk").getDouble("feet");
+
+            response[i].diameter = new Dragons.Vol();
+            response[i].diameter.meters = json.getJSONObject("diameter").getDouble("meters");
+            response[i].diameter.feet = json.getJSONObject("diameter").getDouble("feet");
+
+            JSONArray jsonImgArr = json.getJSONArray("flickr_images");
+            String[] imgs = new String[jsonImgArr.length()];
+            for (int j = 0; j < jsonImgArr.length(); j++) {
+                imgs[j] = jsonImgArr.getString(j);
+            }
+            response[i].images = imgs;
+            response[i].wiki = json.getString("wikipedia");
+            response[i].description = json.getString("description");
+        }
+        model.addAttribute("dragons", response);
+        return "Dragons";
     }
 }
         /*   
