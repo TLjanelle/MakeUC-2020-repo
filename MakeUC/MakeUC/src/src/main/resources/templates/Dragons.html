@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/MakeUcCss.css">
+    <title>Dragons</title>
+</head>
+<body>
+<div th:each="dragon: ${dragons}">
+    <h1 th:text="${dragon.name} + ' - ' + ${dragon.type}"></h1>
+    <div th:each="img: ${dragon.images}">
+        <img th:src="${img}">
+    </div>
+    <p th:text="'Active: ' + ${dragon.active}"></p>
+    <p th:text="'Crew Capacity: ' + ${dragon.capacity}"></p>
+    <p th:text="'Years in orbit: ' + ${dragon.orbit}"></p>
+    <p th:text="'Dry mass: ' + ${dragon.dryMassKg} + ' kg/ ' + ${dragon.dryMassLb} + ' lb'"></p>
+    <p th:text="'First Launch Date: ' + ${dragon.o_launch}"></p>
+    <a th:href="${dragon.wiki}">Wikipedia</a>
+    <p th:text="${dragon.description}"></p>
+
+    <h3>Heat Shield</h3>
+    <p th:text="'Material: ' + ${dragon.shield.material}"></p>
+    <p th:text="'Size: ' + ${dragon.shield.size} + ' meters'"></p>
+    <p th:text="'Temperature: ' + ${dragon.shield.temp}"></p>
+    <p th:text="'Partner Developer: ' + ${dragon.shield.dev}"></p>
+
+    <h3>Thrusters</h3>
+    <div th:each="thruster: ${dragon.thrusters}">
+        <h4 th:text="${thruster.type}"></h4>
+        <p th:text="'Amount: ' + ${thruster.amount}"></p>
+        <p th:text="'Pods: ' + ${thruster.pods}"></p>
+        <p th:text="'Fuel one: ' + ${thruster.f1}"></p>
+        <p th:text="'Fuel two: ' + ${thruster.f2}"></p>
+        <p th:text="'ISP: ' + ${thruster.isp}"></p>
+        <p th:text="'Thrust: ' + ${thruster.thrustKn} + ' kN/' + ${thruster.thrustLbf} + ' lbf'"></p>
+    </div>
+
+    <h3>Launch Details</h3>
+    <p th:text="'Launch Mass: ' + ${dragon.launch.kg} + ' kg/ ' + ${dragon.launch.lb} + ' lb'"></p>
+    <p th:text="'Launch Volume: ' + ${dragon.launchVol.meters} + ' cubic meters/ ' + ${dragon.launchVol.feet} + ' cubic feet'"></p>
+
+    <h3>Return Details</h3>
+    <p th:text="'Return Mass: ' + ${dragon.ret.kg} + ' kg/ ' + ${dragon.ret.lb} + ' lb'"></p>
+    <p th:text="'Return Volume: ' + ${dragon.retVol.meters} + ' cubic meters/ ' + ${dragon.retVol.feet} + ' cubic feet'"></p>
+
+    <h3 th:text="'Pressurized Capsule Volume: ' + ${dragon.pressVol.meters} + ' Cubic Meters/ ' + ${dragon.pressVol.feet} + ' Cubic feet'"></h3>
+
+    <h3>Trunk Information</h3>
+    <p th:text="'Trunk Volume: ' + ${dragon.trunk.vol.meters} + ' Cubic Meters/ ' + ${dragon.trunk.vol.feet} + ' Cubic Feet'"></p>
+    <p th:text="'Solar Arrays: ' + ${dragon.trunk.solArray}"></p>
+    <p th:text="'Cargo is pressurized: ' + (${dragon.trunk.cargo} ? 'no' : 'yes')"></p>
+
+    <p th:text="'Height With Trunk: ' + ${dragon.heightWTruck.meters} + ' meters/ ' +  ${dragon.heightWTruck.feet} + ' feet'"></p>
+    <p th:text="'Diameter: ' + ${dragon.diameter.meters} + ' meters/ ' + ${dragon.diameter.feet} + ' feet'"></p>
+</div>
+</body>
+</html>

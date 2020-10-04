@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Capsules</title>
+</head>
+<body>
+<div class="nav">
+    <a class="links" href="/Spacex">Search</a>
+</div>
+<div class="main">
+    <div th:each="capsule: ${capsules}">
+        <h1 th:text="(${capsule==null} ? '' : 'ID ' + ${capsule.id} + ' Serial ' + ${capsule.serial})"></h1>
+        <p th:text="(${capsule==null} ? '' : 'Status ' + ${capsule.status})"></p>
+        <p th:text="(${capsule==null} ? '' : 'Original Launch ' + ${capsule.o_launch})"></p>
+        <p th:text="(${capsule==null} ? '' : 'Number of landings ' + ${capsule.landings})"></p>
+        <p th:text="(${capsule==null} ? '' : 'Number of reuses ' + ${capsule.reuses})"></p>
+        <p th:text="(${capsule==null} ? '' : 'Capsule Type: ' + ${capsule.type})"></p>
+        <p th:text="(${capsule==null} ? '' : 'Other Details: ' + ${capsule.dets})"></p>
+        <hr>
+    </div>
+</div>
+</body>
+</html>

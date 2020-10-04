@@ -1,0 +1,41 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+main {
+    width: 800px;
+    height: 200px;
+}
+footer {
+    padding-top: 500px;
+    position: relative;
+    clear: both;
+    text-align: center;
+}
+h1 {
+    color: white;
+    text-align: center;
+}
+body {
+    background-image:url(Pictures/Background.webp);
+    width: 1100px;
+    margin: 15px auto;
+}
+
+h3{
+    padding-top: 15px;
+    padding-left: 100px;
+    color: yellow;
+    font-size: 22px;
+}
+p{
+    padding-top: 15px;
+    padding-left: 150px;
+    color: lightskyblue; 
+    font-size: 20px;
+}
+.StarPic{
+    width: 190px;
+    padding-top: 10px;
+    padding-left: 500px;
+}

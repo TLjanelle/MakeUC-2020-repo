@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Rockets</title>
+</head>
+<body>
+<div class="nav">
+    <a class="links" href="/Spacex">Search</a>
+</div>
+<div class="main">
+    <div th:each="rocket: ${rockets}">
+        <div>
+            <h1 th:text="${rocket.name}"></h1>
+            <p th:text="${rocket.description}"></p>
+            <p th:text="${rocket.id}"></p>
+            <a th:href="${rocket.wiki}">Wikipedia</a>
+        </div>
+        <div th:each="source: ${rocket.images}">
+            <img th:src="${source}">
+        </div>
+        <p th:text="${rocket.active}"></p>
+        <p th:text="${rocket.stages}"></p>
+        <p th:text="${rocket.boosters}"></p>
+        <p th:text="${rocket.cost}"></p>
+        <p th:text="${rocket.successRate}"></p>
+        <p th:text="${rocket.o_launch}"></p>
+        <p th:text="${rocket.country}"></p>
+        <p th:text="${rocket.company}"></p>
+
+        <h3 th:text="'Height: ' + ${rocket.height.meters} + ' meters / ' + ${rocket.height.feet} + ' feet'"></h3>
+        <h3 th:text="'Diameter: ' + ${rocket.diameter.meters} + ' meters / ' + ${rocket.diameter.feet} + ' feet'"></h3>
+        <h3 th:text="'Mass: ' + ${rocket.mass.kilo} + ' kilograms / ' + ${rocket.mass.pounds} + ' pounds'"></h3>
+
+        <h3>Payloads</h3>
+        <div th:each="payload: ${rocket.payloads}">
+            <p th:text="${payload.id}"></p>
+            <p th:text="${payload.name}"></p>
+            <p th:text="${payload.mass.kilo}"></p>
+            <p th:text="${payload.mass.pounds}"></p>
+        </div>
+        <div>
+            <h3>First Stage</h3>
+            <p th:text="${rocket.fs.reusable}"></p>
+            <p th:text="${rocket.fs.engines}"></p>
+            <p th:text="${rocket.fs.fuelTons}"></p>
+            <p th:text="${rocket.fs.burnSecs}"></p>
+            <p th:text="${rocket.fs.thrustSea}"></p>
+            <p th:text="${rocket.fs.thrustSea.kn}"></p>
+            <p th:text="${rocket.fs.thrustSea.lbf}"></p>
+            <p th:text="${rocket.fs.thrustVac}"></p>
+            <p th:text="${rocket.fs.thrustVac.kn}"></p>
+            <p th:text="${rocket.fs.thrustVac.lbf}"></p>
+        </div>
+        <div>
+            <h3>Second Stage</h3>
+            <p th:text="${rocket.ss.reusable}"></p>
+            <p th:text="${rocket.ss.engines}"></p>
+            <p th:text="${rocket.ss.fuelTons}"></p>
+            <p th:text="${rocket.ss.burnSecs}"></p>
+            <p th:text="${rocket.ss.thrust}"></p>
+            <p th:text="${rocket.ss.thrust.kn}"></p>
+            <p th:text="${rocket.ss.thrust.lbf}"></p>
+        </div>
+        <div>
+            <h3>Engines</h3>
+            <p th:text="${rocket.engines}"></p>
+            <p th:text="${rocket.engines.num}"></p>
+            <p th:text="${rocket.engines.type}"></p>
+            <p th:text="${rocket.engines.version}"></p>
+            <p th:text="${rocket.engines.layout}"></p>
+            <p th:text="${rocket.engines.isp}"></p>
+            <p th:text="${rocket.engines.isp.seaLevel}"></p>
+            <p th:text="${rocket.engines.isp.vacuum}"></p>
+            <p th:text="${rocket.engines.engineMaxLoss}"></p>
+            <p th:text="${rocket.engines.prop1}"></p>
+            <p th:text="${rocket.engines.prop2}"></p>
+            <p th:text="${rocket.engines.seaLevel.kn}"></p>
+            <p th:text="${rocket.engines.seaLevel.lbf}"></p>
+            <p th:text="${rocket.engines.thrustToWeight}"></p>
+        </div>
+        <div>
+            <h3>Landing Legs</h3>
+            <p th:text="${rocket.landLegs.num}"></p>
+            <p th:text="${rocket.landLegs.material}"></p>
+        </div>
+        <hr>
+    </div>
+</div>
+</body>
+</html>

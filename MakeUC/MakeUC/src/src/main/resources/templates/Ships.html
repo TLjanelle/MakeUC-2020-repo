@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Ships</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="nav">
+    <a class="links" href="/Spacex">Search</a>
+</div>
+<div class="main">
+    <div th:each="ship: ${ships}">
+        <h1 th:text="${ship.name} + ' - ' + ${ship.type}"></h1>
+        <img th:src="${ship.image}">
+        <a th:href="${ship.url}">Website</a>
+        <p th:text="'Active: ' + ${ship.active}"></p>
+        <p th:text="'Weight: ' + ${ship.weightkg} + ' kg/ ' + ${ship.weightlb} + ' lb'"></p>
+        <p th:text="'Port: ' + ${ship.port}"></p>
+        <h4>Roles</h4>
+        <ul th:each="role: ${ship.roles}">
+            <li th:text="${role}"></li>
+        </ul>
+        <h4>Missions</h4>
+        <ul th:each="mission: ${ship.missions}">
+            <li th:text="${mission}"></li>
+        </ul>
+        <hr>
+    </div>
+</div>
+</body>
+</html>

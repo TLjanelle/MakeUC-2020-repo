@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Cores</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="nav">
+    <a class="links" href="/Spacex">Search</a>
+</div>
+<div class="main">
+    <div th:each="core: ${cores}">
+        <h1 th:text="'Serial ' + ${core.serial} + ' - Block ' + (${core.block == null}? '0' : ${core.block})"></h1>
+        <p th:text="'Status: ' + ${core.status}"></p>
+        <p th:text="'Original Launch: ' + ${core.o_launch}"></p>
+        <p th:text="'Number of times reused: ' + ${core.reuse}"></p>
+        <p th:text="'Return to launch site attempts: ' + ${core.rtls_att}"></p>
+        <p th:text="'Return to launch site landings: ' + ${core.rtls_landing}"></p>
+        <p th:text="'Autonomous Spaceport Drone Ship landing attempts: ' + ${core.asds_att}"></p>
+        <p th:text="'Autonomous Spaceport Drone Ship landings: ' + ${core.asds_landing}"></p>
+        <p th:text="'Water Landing ' + (${core.water_landing} ? 'yes' : 'no')"></p>
+        <p th:text="'Other Details: ' + ${core.dets}"></p>
+        <hr>
+    </div>
+</div>
+</body>
+</html>
