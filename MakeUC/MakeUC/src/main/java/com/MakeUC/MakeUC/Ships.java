@@ -16,13 +16,27 @@ public class Ships{
     public int AttemptedLanding;
     public String Mission;
 
-    public Ships(String a, String b, String c, String d, String e
+    Ships(String a, String b, String c, String d, String e
     int f, String g, String h, int i, int, j, int k, int l, String m)
     {
-        
+        ShipId = a;
+        ShipName = b;
+        ShipModel = c;
+        ShipType = d;
+        Role = e;
+        YearBuilt = f;
+        HomePort = g;
+        Status = h;
+        Speed = i;
+        Course = j;
+        SuccessfulLandings = k;
+        AttemptedLanding = l;
+        Mission = m;
 
-    // public void getLocation(float[][] ){
+    }
 
-    // }
+    public void ShipInfo(){
+
+     }
 
 }
