@@ -2,14 +2,20 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/css/MakeUcCss.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
     <title>Dragons</title>
 </head>
 <body>
+<div class="nav">
+    <a class="links" href="/Spacex">Search</a>
+</div>
+<div class="main">
 <div th:each="dragon: ${dragons}">
     <h1 th:text="${dragon.name} + ' - ' + ${dragon.type}"></h1>
-    <div th:each="img: ${dragon.images}">
-        <img th:src="${img}">
+    <div id="images">
+        <div th:each="img: ${dragon.images}">
+            <img th:src="${img}">
+        </div>
     </div>
     <p th:text="'Active: ' + ${dragon.active}"></p>
     <p th:text="'Crew Capacity: ' + ${dragon.capacity}"></p>
@@ -53,6 +59,8 @@
 
     <p th:text="'Height With Trunk: ' + ${dragon.heightWTruck.meters} + ' meters/ ' +  ${dragon.heightWTruck.feet} + ' feet'"></p>
     <p th:text="'Diameter: ' + ${dragon.diameter.meters} + ' meters/ ' + ${dragon.diameter.feet} + ' feet'"></p>
+    <hr>
+</div>
 </div>
 </body>
 </html>
