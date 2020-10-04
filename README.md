@@ -16,14 +16,6 @@ This repo utlizes java, html, and css.
 
 Google Cloud, Spring Boot
 
-## Features  
-
-With 
-
-## Code Example
-
-insert text here
-
 ## API Reference  
 
 r/SpaceX API -  
