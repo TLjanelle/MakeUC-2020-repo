@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="MakeUC\MakeUC\src\main\resources\templates\MakeUcCss.css">
-  <title>Ships</title>
+  <title>SpaceX Maritime Ships</title>
 </head>>
 
 <link rel="stylesheet" href="MakeUC\MakeUC\src\main\resources\templates\MakeUcCss.css">
@@ -13,13 +13,18 @@
 
 <body>
   
-  <script>
-  </script>
-  
   <!-- Remember to edit this -->
   <p>The ships who aid SpaceX launches, including ASDS drone ships,
     tugs, fairing recovery ships, and various support ships are displayed below.</p>
-
+<div th:each="ships: ${ships}"> 
+  <h1 th:text="'Ship ID ' + ${ships.id}"></h1>
+  <p th:text="'Status ' + ${capsule.status}"></p>
+  <p th:text="'Original Launch ' + ${capsule.o_launch}"></p>
+  <p th:text="'Number of landings ' + ${capsule.landings}"></p>
+  <p th:text="'Number of reuses ' + ${capsule.reuses}"></p>
+  <p th:text="'Capsule Type: ' + ${capsule.type}"></p>
+  <p th:text="'Other Details: ' + ${capsule.dets}"></p>
+</div>>
 
 </body>
 
