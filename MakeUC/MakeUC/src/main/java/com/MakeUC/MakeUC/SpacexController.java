@@ -26,6 +26,8 @@ public class SpacexController {
                 return "redirect:Launches";
             case "missions":
                 return "redirect:Missions";
+            case "ships"
+                return "redirect:Ships";
         }
 
         return "Search";

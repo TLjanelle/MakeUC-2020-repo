@@ -36,7 +36,7 @@ public class Ships{
     }
 
     public void ShipInfo(){
-
+        
      }
 
 }
