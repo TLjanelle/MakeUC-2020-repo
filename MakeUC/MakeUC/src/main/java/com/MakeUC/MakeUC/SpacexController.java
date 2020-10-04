@@ -26,8 +26,6 @@ public class SpacexController {
                 return "redirect:Launches";
             case "missions":
                 return "redirect:Missions";
-            case "ships"
-                return "redirect:Ships";
         }
 
         return "Search";
@@ -106,37 +104,42 @@ public class SpacexController {
         return "Cores";
     }
 
-
     @RequestMapping("/Spacex/Ships")
     public String Ships(Model model) {
         JSONObject apiJSON = JSONReader.readJSON(("https://api.spacexdata.com/v3/ships"), "{response:", "}");
-   JSONArray data[][] = apiJSON.getJSONArray("response");
+        JSONArray data = apiJSON.getJSONArray("response");
 
-        Ship[] response = new Ship[dataArr.length()];
-        for (int i=0; i < dataArr.length(); i++) {
-            JSONObject json = dataArr.getJSONObject(i);
-            response[i] = new Ships(
-                json.getString("ship_id"),
-                json.getString("ship_name"),
-                json.getString("ship_model"),
-                json.getString("ship_type"),
-                json.getString("role"),
-                json.getInt("year_built"),
-                json.getString("home_port"),
-                json.getString("status"),
-                json.getInt("speed_kn"),
-                json.getInt("course_deg"),
-                json.getInt("successful_landings"),
-                json.getInt("attempted_landing"),
-                json.getString("mission")
-                );
+        Ship[] response = new Ship[data.length()];
+        for (int i=0; i < data.length(); i++) {
+            JSONObject json = data.getJSONObject(i);
+            response[i] = new Ship();
+            response[i].name = json.getString("ship_name");
+            response[i].type = json.getString("ship_type");
+
+            JSONArray rolesJSON = json.getJSONArray("roles");
+            String[] roles = new String[rolesJSON.length()];
+            for (int j=0; j < rolesJSON.length(); j++) {
+                roles[j] = rolesJSON.getString(j);
+            }
+            response[i].roles = roles;
+            response[i].active = json.getBoolean("active");
+            try {response[i].weightkg = json.getInt("weight_kg");} catch(Exception e) {response[i].weightkg=0;}
+            try {response[i].weightlb = json.getInt("weight_lbs");} catch(Exception e) {response[i].weightlb=0;}
+            response[i].port = json.getString("home_port");
+
+            JSONArray missionJSON= json.getJSONArray("missions");
+            String[] missions = new String[missionJSON.length()];
+            for(int j=0; j < missionJSON.length(); j++) {
+                missions[j] = missionJSON.getJSONObject(j).getString("name");
+            }
+            response[i].missions = missions;
+            try {response[i].url = json.getString("url");} catch (Exception e) {response[i].url = null;}
+            try {response[i].image = json.getString("image");} catch (Exception e) {response[i].image = null;}
         }
-        try { response[i].setStatus(json.getString("status")); } catch (Exception e) { }
-        try { response[i].setDetails(json.getString("details")); } catch (Exception e) { }
-        try { response[i].setBlock(json.getInt("block")); } catch (Exception e) { }
-        try { response[i].setLaunch(json.getString("original_launch")); } catch (Exception e) { }
+        model.addAttribute("ships", response);
+        return "Ships";
     }
-    
+
     @RequestMapping("/Spacex/Rockets")
     public String Rockets(Model model) {
         JSONObject apiJSON = JSONReader.readJSON(("https://api.spacexdata.com/v3/rockets"), "{response:", "}");
@@ -363,21 +366,38 @@ public class SpacexController {
             response[i].images = imgs;
             response[i].wiki = json.getString("wikipedia");
             response[i].description = json.getString("description");
+
+
         }
         model.addAttribute("dragons", response);
         return "Dragons";
     }
-}
-        /*   
-            
 
-            JSONArray missDat = json.getJSONArray("missions");
-            String[] missions = new String[missDat.length()];
-            for (int j=0; j < missDat.length(); j++) {
-                missions[j] = missDat.getJSONObject(j).getString("name");
-            }
-            response[i].setMissions(missions);
+    @RequestMapping("/Spacex/Launches")
+    public String Launches(Model model) {
+        JSONObject apiJSON = JSONReader.readJSON(("https://api.spacexdata.com/v3/launches"), "{response:", "}");
+
+        JSONArray dataArr = apiJSON.getJSONArray("response");
+
+        Launch[] response = new Launch[dataArr.length()];
+        for (int i = 0; i < dataArr.length(); i++) {
+            JSONObject json = dataArr.getJSONObject(i);
+
+            response[i] = new Launch();
+            response[i].flight = json.getInt("flight_number");
+            response[i].name = json.getString("mission_name");
+            response[i].upcoming = json.getBoolean("upcoming");
+            try {response[i].launch = json.getString("launch_date_utc");} catch(Exception e) {response[i].launch = "";}
+            response[i].launchSite = json.getJSONObject("launch_site").getString("site_name_long");
+            response[i].tentative = json.getBoolean("is_tentative");
+            response[i].tentPrec = json.getString("tentative_max_precision");
+            response[i].tbd = json.getBoolean("tbd");
+            try{response[i].rockName = json.getJSONObject("rocket_name").getString("rocket_name");} catch(Exception e) {response[i].rockName = "";}
+            try{response[i].rockType = json.getJSONObject("rocket_type").getString("rocket_type");} catch(Exception e) {response[i].rockType = "";}
+            try {response[i].success = json.getBoolean("launch_success");} catch (Exception e) {response[i].success = null;}
+            try{response[i].details = json.getString("details");} catch(Exception e) {response[i].details = "";}
         }
-        model.addAttribute("ships", response);
-        return "Ships";
-*/
+        model.addAttribute("launches", response);
+        return "Launch";
+    }
+}
