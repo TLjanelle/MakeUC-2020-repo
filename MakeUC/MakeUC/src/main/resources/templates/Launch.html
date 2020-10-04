@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:each="launch: ${launches}">
+        <h1 th:text="${launch.flight} + ' - ' + ${launch.name}"></h1>
+        <p th:text="'TBD: ' + ${launch.tbd} + 'Tentative: ' + (${launch.tentative} ? 'yes' : 'no') + ' Upcoming: ' + (${launch.upcoming} ? 'yes' : 'no')"></p>
+        <p th:text="'Tentative Max Precision: ' + ${launch.tentPrec}"></p>
+        <p th:text="'Launch Date: ' + ${launch.launch}"></p>
+        <p th:text="'Launch Site: ' + ${launch.launchSite}"></p>
+        <p th:text="'Rocket Name: ' + ${launch.rockName} + ' Rocket Type: ' + ${launch.rockType}"></p>
+        <p th:text="'Success: ' + (${launch.success} ? 'yes' : 'no')"></p>
+        <p th:text="'Details:' + ${launch.details}"></p>
+    </div>
+</body>
+</html>
